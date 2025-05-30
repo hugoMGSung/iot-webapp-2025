@@ -671,6 +671,14 @@
 
     <img src="./image/web0017.png" width="600">
 
+12. 자동으로 만들 경우의 문제점
+    - Model의 관계 부분에서 부모로의 연결이 Not Null로 연결됨. CUD 작업 불가
+    - EF Core의 탐색 속성(Navigation Property)
+    - = null!로 정의되어 있어서 EF Core는 내부적으로 필수(NOT NULL) 관계라고 간주
+    - public virtual Divtbl DivisionNavigation { get; set; } **= null!**; 
+    - public virtual Divtbl? DivisionNavigation { get; set; } 로 변경
+
+
 
 #### ASP.NET Core MVC - Kelly Portfolio 디자인 클로닝(계속)
 - 뉴스, 게시판 완료
