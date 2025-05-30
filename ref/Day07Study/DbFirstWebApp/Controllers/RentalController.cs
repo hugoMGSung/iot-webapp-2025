@@ -48,8 +48,11 @@ namespace DbFirstWebApp.Controllers
         // GET: Rental/Create
         public IActionResult Create()
         {
-            ViewData["BookIdx"] = new SelectList(_context.Bookstbls, "Idx", "Idx");
-            ViewData["MemberIdx"] = new SelectList(_context.Membertbls, "Idx", "Idx");
+            // HACK : 자동 생성 후 변경
+            //ViewData["BookIdx"] = new SelectList(_context.Bookstbls, "Idx", "Idx");
+            //ViewData["MemberIdx"] = new SelectList(_context.Membertbls, "Idx", "Idx");
+            ViewData["BookIdx"] = new SelectList(_context.Bookstbls, "Idx", "Names");
+            ViewData["MemberIdx"] = new SelectList(_context.Membertbls, "Idx", "Names");
             return View();
         }
 

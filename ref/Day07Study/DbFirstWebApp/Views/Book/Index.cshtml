@@ -58,7 +58,9 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DivisionNavigation.Division)
+                <!-- HACK : 자동생성 후 변경 -->
+                @* @Html.DisplayFor(modelItem => item.DivisionNavigation.Division) *@
+                @Html.DisplayFor(modelItem => item.DivisionNavigation.Names)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Idx">Edit</a> |

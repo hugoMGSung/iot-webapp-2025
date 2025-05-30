@@ -45,7 +45,9 @@
             @Html.DisplayNameFor(model => model.DivisionNavigation)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DivisionNavigation.Division)
+            <!-- HACK : 자동생성 후 수정필요 -->
+            @* @Html.DisplayFor(model => model.DivisionNavigation.Division) *@
+            @Html.DisplayFor(model => model.DivisionNavigation.Names)
         </dd>
     </dl>
     

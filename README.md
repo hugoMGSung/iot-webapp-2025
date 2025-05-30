@@ -678,7 +678,9 @@
     - public virtual Divtbl DivisionNavigation { get; set; } **= null!**; 
     - public virtual Divtbl? DivisionNavigation { get; set; } 로 변경
 
+    - HACK : 자동 생성 후 수정 주석부분 확인 | BookController, Model, View 확인할 것
 
+    <img src="./image/web9998.png" width="600">
 
 #### ASP.NET Core MVC - Kelly Portfolio 디자인 클로닝(계속)
 - 뉴스, 게시판 완료

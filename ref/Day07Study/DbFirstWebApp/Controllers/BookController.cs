@@ -48,6 +48,7 @@ namespace DbFirstWebApp.Controllers
         // GET: Book/Create
         public IActionResult Create()
         {
+            // HACK : 자동 생성 후 변경
             //ViewData["Division"] = new SelectList(_context.Divtbls, "Division", "Division");
             ViewData["Division"] = new SelectList(_context.Divtbls, "Division", "Names");
             return View();
@@ -67,6 +68,7 @@ namespace DbFirstWebApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            // HACK : 자동 생성 후 확인
             // 오류 확인시 사용
             /*if (!ModelState.IsValid)
             {
@@ -95,7 +97,10 @@ namespace DbFirstWebApp.Controllers
             {
                 return NotFound();
             }
-            ViewData["Division"] = new SelectList(_context.Divtbls, "Division", "Division", bookstbl.Division);
+            // HACK : 자동 생성 후 변경
+            //ViewData["Division"] = new SelectList(_context.Divtbls, "Division", "Division", bookstbl.Division);
+            ViewData["Division"] = new SelectList(_context.Divtbls, "Division", "Names", bookstbl.Division);
+
             return View(bookstbl);
         }
 
@@ -131,7 +136,10 @@ namespace DbFirstWebApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Division"] = new SelectList(_context.Divtbls, "Division", "Division", bookstbl.Division);
+            // HACK : 자동 생성 후 변경
+            //ViewData["Division"] = new SelectList(_context.Divtbls, "Division", "Division", bookstbl.Division);
+            ViewData["Division"] = new SelectList(_context.Divtbls, "Division", "Names", bookstbl.Division);
+
             return View(bookstbl);
         }
 
