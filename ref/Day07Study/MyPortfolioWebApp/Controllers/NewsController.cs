@@ -43,7 +43,13 @@ namespace MyPortfolioWebApp.Controllers
         // GET: http://localhost:5234/News/Create GET method로 호출!!
         public IActionResult Create()
         {
-            return View();  // View로 데이터를 가져갈게 아무것도 없음
+            var news = new News
+            {
+                Writer = "관리자", // 작성자 자동으로 관리자 지정
+                PostDate = DateTime.Now, // 작성일 자동으로 현재시간 지정
+                ReadCount = 0 // 조회수 자동으로 0 지정
+            };
+            return View(news);  // View로 데이터를 가져갈게 아무것도 없음
         }
 
         // POST: News/Create
@@ -52,10 +58,14 @@ namespace MyPortfolioWebApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         // <form asp-controller="News" asp-action="Create"> 이 http://localhost:5234/News/Create 포스트메서드 호출
-        public async Task<IActionResult> Create([Bind("Id,Writer,Title,Description,PostDate,ReadCount")] News news)
+        public async Task<IActionResult> Create([Bind("Id,Title,Description")] News news)
         {
             if (ModelState.IsValid)
             {
+                news.Writer = "관리자"; // 작성자 자동으로 관리자 지정
+                news.PostDate = DateTime.Now; // 작성일 자동으로 현재시간 지정
+                news.ReadCount = 0; // 조회수 자동으로 0 지정
+
                 // INSERT INTO...
                 _context.Add(news);
                 // COMMIT
@@ -87,7 +97,7 @@ namespace MyPortfolioWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Writer,Title,Description,PostDate,ReadCount")] News news)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description")] News news)
         {
             if (id != news.Id)
             {
@@ -98,8 +108,18 @@ namespace MyPortfolioWebApp.Controllers
             {
                 try
                 {
-                    // UPDATE News SET ...
-                    _context.Update(news);
+                    // 기존값 유지용
+                    var existingNews = await _context.News.FindAsync(id);
+                    if (existingNews == null)
+                    {
+                        return NotFound();
+                    }
+
+                    existingNews.Title = news.Title; // 제목 업데이트
+                    existingNews.Description = news.Description; // 내용 업데이트
+
+                    //// UPDATE News SET ...
+                    //_context.Update(news);
                     // COMMIT
                     await _context.SaveChangesAsync();
                 }
