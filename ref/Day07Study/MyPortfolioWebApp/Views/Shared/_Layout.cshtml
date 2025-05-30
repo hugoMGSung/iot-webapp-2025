@@ -1,4 +1,22 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@inject Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper Html
+
+@functions {
+    bool IsActive(string controller, string action)
+    {
+        var routeData = ViewContext.RouteData;
+        var currentAction = routeData.Values["action"]?.ToString();
+        var currentController = routeData.Values["controller"]?.ToString();
+
+        return string.Equals(controller, currentController, StringComparison.OrdinalIgnoreCase)
+            && string.Equals(action, currentAction, StringComparison.OrdinalIgnoreCase);
+    }
+
+    string ActiveClass(string controller, string action) =>
+        IsActive(controller, action) ? "active" : "";
+}
+
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="utf-8" />
@@ -33,19 +51,19 @@
             <nav id="navmenu" class="navmenu">
                 <ul>
                     <!-- ASP.NET Core Controller/View형태로 변경되어야 함 -->
-                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-controller="Resume" asp-action="Index">Resume</a></li>
-                    <li><a asp-controller="Resume" asp-action="Services">Services</a></li>
-                    <li><a asp-controller="Resume" asp-action="Portfolio">Portfolio</a></li>
+                    <li><a asp-controller="Home" asp-action="Index" class="@ActiveClass("Home", "Index")">홈</a></li>
+                    <li><a asp-controller="Home" asp-action="About" class="@ActiveClass("Home", "About")">소개</a></li>
+                    <li><a asp-controller="Resume" asp-action="Index" class="@ActiveClass("Resume", "Index")">이력서</a></li>
+                    <li><a asp-controller="Resume" asp-action="Services" class="@ActiveClass("Resume", "Services")">서비스</a></li>
+                    <li><a asp-controller="Resume" asp-action="Portfolio" class="@ActiveClass("Resume", "Portfolio")">포트폴리오</a></li>
                     <li class="dropdown">
-                        <a href="#"><span>Board</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <a href="#"><span>게시판</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
-                            <li><a asp-controller="News" asp-action="Index">News</a></li>
-                            <li><a asp-controller="Board" asp-action="Index">Board</a></li>
+                            <li><a asp-controller="News" asp-action="Index">뉴스</a></li>
+                            <li><a asp-controller="Board" asp-action="Index">자유게시판</a></li>
                         </ul>
                     </li>
-                    <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-controller="Home" asp-action="Contact" class="@ActiveClass("Home", "Contact")">메일</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>

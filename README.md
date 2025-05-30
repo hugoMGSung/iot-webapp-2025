@@ -682,6 +682,45 @@
 
     <img src="./image/web9998.png" width="600">
 
+13. WebEditor 클라이언트 라이브러리 Trumbowyg 설치
+    - 클라이언트 라이브러리 추가
+
+    <img src="./image/web9997.png" width="600">
+
+14. Markdown Viewer
+    - NuGet 패키지 관리자, Westwind.AspNetCore.Markdown 설치
+
+15. 메일관련
+    - [소스확인](./ref/Day07Study/MyPortfolioWebApp/Controllers/HomeController.cs)
+
+16. 메뉴 활성화
+    - _Layout.cshtml 내에 작성
+
+    ```cs
+    // cshtml 상단.
+    @using Microsoft.AspNetCore.Mvc.Rendering
+    @inject Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper Html
+
+    @functions {
+        bool IsActive(string controller, string action)
+        {
+            var routeData = ViewContext.RouteData;
+            var currentAction = routeData.Values["action"]?.ToString();
+            var currentController = routeData.Values["controller"]?.ToString();
+
+            return string.Equals(controller, currentController, StringComparison.OrdinalIgnoreCase)
+                && string.Equals(action, currentAction, StringComparison.OrdinalIgnoreCase);
+        }
+
+        string ActiveClass(string controller, string action) =>
+            IsActive(controller, action) ? "active" : "";
+    }
+    ```
+
+    ```html
+    <li><a asp-controller="Home" asp-action="Index" class="@ActiveClass("Home", "Index")">Home</a></li>
+    ```
+
 #### ASP.NET Core MVC - Kelly Portfolio 디자인 클로닝(계속)
 - 뉴스, 게시판 완료
 - 한글화
