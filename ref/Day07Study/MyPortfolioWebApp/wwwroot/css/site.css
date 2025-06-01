@@ -1375,3 +1375,63 @@ section,
     .contact .php-email-form button[type=submit]:hover {
         background: color-mix(in srgb, var(--accent-color), transparent 25%);
     }
+
+/*
+    Board Style. 추가~~~
+*/
+/* 테이블 전체 기본 스타일 */
+.board-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f5f5f5;
+    color: #333;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 14px;
+}
+
+    /* 제목 헤더 */
+    .board-table thead tr {
+        background-color: #00cfcf;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    /* 본문 줄 */
+    .board-table tbody tr:nth-child(odd) {
+        background-color: #ffffff;
+    }
+
+    .board-table tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    /* 마우스 오버 효과 */
+    .board-table tbody tr:hover {
+        background-color: #e0f7fa;
+        transition: background-color 0.2s ease-in-out;
+    }
+
+    /* 셀 스타일 */
+    .board-table th,
+    .board-table td {
+        padding: 12px 16px;
+        border-bottom: 1px solid #ddd;
+        vertical-align: middle;
+    }
+
+        /* 제목 열 왼쪽 정렬 */
+        .board-table td.title-column {
+            text-align: left;
+        }
+
+            /* 제목 링크 민트색 */
+            .board-table td.title-column a {
+                color: #00cfcf;
+                text-decoration: none;
+            }
+
+                .board-table td.title-column a:hover {
+                    text-decoration: underline;
+                    color: #009ea1;
+                }
