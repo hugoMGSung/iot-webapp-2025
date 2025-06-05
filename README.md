@@ -906,8 +906,31 @@
     - Regiser 뷰 추가
     - Login 뷰 추가
     - 각 기능별 버튼, 링크 추가
-2. 게시판 준비
-3. 이후 작업
+
+2. 회원가입 정보 확장
+    - Models.CustomUser 클래스 생성. IdentityUser를 상속. City, Mobile, Hobby 속성 추가
+    - Program.cs 에서 IdentityUser -> CustomUser로 변경
+    - AccountController 에서 IdentityUser -> CustomUser로 변경
+    - _Layout.cshtml, News.Index.cshtml, News.Detail.cshtml에 IdentityUser -> CustomUser로 변경
+    - ApplicationDbContext.cs에서 IdentityUser -> CustomUser로 변경
+    - NuGet 패키지 관리자 콘솔에서
+        - Add-Migration (이름) 실행, Update-Database 실행
+    - Account.Register.cshtml 입력양식 추가
+    - AccountController.cs Register() Post 메서드 수정
+    - Program.cs에서 패스워드 정책을 간단하게 변경
+
+3. 게시판 준비
+    - MySql Workbench에서 Board 테이블 생성
+    - NuGet 패키지 관리자 콘솔에서 DB스캐폴드
+        - Scaffold-DbContext "Server=localhost;..." Pomelo.EntityFrameworkCore.MySql -OutputDir BackupModels
+    - BackupModels에서 필요한 모델클래스를 Models 이전, 수정
+    - ApplicationDbContext에 `DbSet<Board>` 추가
+    - Controller에 BoardController 클래스 스캐폴딩 생성
+
+4. 이후 작업
+    - HomeController Contact() Post메서드 신규 추가
+    - 메일관련 작업 - Pendding
+
 
 ### ASP.NET Core API서버
 

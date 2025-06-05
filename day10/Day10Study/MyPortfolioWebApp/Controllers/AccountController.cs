@@ -8,11 +8,11 @@ namespace MyPortfolioWebApp.Controllers
     public class AccountController : Controller
     {
         // ASP.NET Core Identity 필요한 변수
-        private readonly UserManager<IdentityUser> userManager;
-        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly UserManager<CustomUser> userManager;
+        private readonly SignInManager<CustomUser> signInManager;
 
         // 생성자
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<CustomUser> userManager, SignInManager<CustomUser> signInManager)
         {
             // userManager나 signInManager에 null값이 들어오면 안됨
             this.userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
@@ -32,7 +32,14 @@ namespace MyPortfolioWebApp.Controllers
             if (ModelState.IsValid)
             {
                 // Id를 이메일로 사용하겠다
-                var user = new IdentityUser { UserName = model.Email, Email = model.Email };
+                // 나중에 속성 추가
+                var user = new CustomUser { 
+                    UserName = model.Email, 
+                    Email = model.Email, 
+                    City = model.City,
+                    Mobile = model.Mobile,
+                    Hobby = model.Hobby,
+                };
                 var result = await userManager.CreateAsync(user, model.Password); // 자동으로 DB에 저장
 
                 if (result.Succeeded)
