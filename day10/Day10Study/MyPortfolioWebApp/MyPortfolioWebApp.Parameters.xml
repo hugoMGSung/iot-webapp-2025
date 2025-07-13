@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="https://3.36.52.206:8172/msdeploay.axd" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\01_Programming\\704_ASPNET_Bank\\iot-webapp-2025\\day10\\Day10Study\\MyPortfolioWebApp\\obj\\Release\\net8\.0\\PubTmp\\Out\\$" />
+  </parameter>
+</parameters>
